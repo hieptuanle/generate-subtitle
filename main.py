@@ -1,5 +1,4 @@
 # %%
-import time
 import math
 import ffmpeg
 
@@ -11,10 +10,11 @@ input_video = "/Users/hieple/Movies/2024-07-18 20-32-42.mov"
 input_file_name = input_video.split("/")[-1]
 input_video_name = input_file_name.replace(".mov", "")
 
-input_video_name
 # %%
+# input_video_name
 
 
+# %%
 def extract_audio():
     extracted_audio = f"audio-{input_video_name}.wav"
     stream = ffmpeg.input(input_video)
@@ -24,10 +24,7 @@ def extract_audio():
 
 
 # %%
-extracted_audio = extract_audio()
-
-# %%
-extracted_audio = f"audio-{input_video_name}.wav"
+# extracted_audio = extract_audio()
 
 
 # %%
@@ -45,7 +42,7 @@ def transcribe(audio):
 
 # %%
 
-language, segments = transcribe(audio=extracted_audio)
+# language, segments = transcribe(audio=extracted_audio)
 
 
 # %%
@@ -81,7 +78,7 @@ def generate_subtitle_file(language, segments):
 
 
 # %%
-subtitle_file = generate_subtitle_file(language=language, segments=segments)
+# subtitle_file = generate_subtitle_file(language=language, segments=segments)
 
 
 # %%
@@ -114,6 +111,12 @@ def add_subtitle_to_video(soft_subtitle, subtitle_file, subtitle_language):
 # %%
 def run():
     extracted_audio = extract_audio()
+    language, segments = transcribe(audio=extracted_audio)
+    subtitle_file = generate_subtitle_file(language=language, segments=segments)
+
+    add_subtitle_to_video(
+        soft_subtitle=True, subtitle_file=subtitle_file, subtitle_language=language
+    )
 
 
 run()
